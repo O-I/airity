@@ -1,5 +1,5 @@
-require "airity/version"
-
-module Airity
-  # Your code goes here...
-end
+require 'capybara'
+require 'capybara/dsl'
+require 'highline/import'
+require 'airity/runner'
+require 'airity/version'
