@@ -1,26 +1,14 @@
 # Airity
 
-TODO: Write a gem description
+Launch a Google Hangouts on Air from the command line.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'airity'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install airity
 
 ## Usage
 
-TODO: Write usage instructions here
+Just type in `airity` at the command line and follow the steps.
 
 ## Contributing
 
