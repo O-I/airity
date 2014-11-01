@@ -1,0 +1,3 @@
+@config = { email: 'foo@bar.com',
+            password: 'bazqux',
+            meeting_name: "Avengers #{Time.now.strftime('%B %Y')} Meeting" }
