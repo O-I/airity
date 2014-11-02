@@ -8,7 +8,6 @@ module Airity
       Capybara.app_host = 'https://plus.google.com'
 
       # Collect credentials from command line
-      # TODO: add configuration file to prevent repetitive entry
       email = ask('Email:') { |q| q.echo = true }
       password = ask('Password:') { |q| q.echo = false }
 
@@ -21,15 +20,17 @@ module Airity
         fill_in 'Email', with: email
         fill_in 'Password', with: password
         click_button 'Sign in'
+      rescue
+        # User is already logged in
+      end
 
-        # requires 2FA for my account
-        # *** remove for BostonRB ***
+      # Allow for 2FA, if required
+      begin
         authentication_token = ask('Token:') { |q| q.echo = false }
         fill_in 'Enter code', with: authentication_token
         click_button 'Verify'
-        # *** remove for BostonRB ***
       rescue
-        # User is already logged in
+        # 2FA is not required
       end
 
       # Navigate to Google+ Hangouts on Air page
@@ -40,12 +41,10 @@ module Airity
       meeting_name = ask('Meeting name:') { |q| q.echo = true }
       fill_in 'Give it a name', with: meeting_name
 
-      # remove Public from Audience field
-      # prompt for email addresses of speakers and admin(s), e.g.,
-      # ask('Invitees' emails (separate each by a space and invite yourself')
-      # { |q| q.echo = true }
-      # for each, add to audience field
-      # click_button 'Share'
+      # Clear Audience text field
+      find('div[title="Browse people"]').click
+      find('span', text: 'selected', exact: false).click
+      find('div[role="button"]', text: 'Unselect all').click
 
       # Make it full screen
       `osascript -e 'tell application "System Events" to keystroke "f" using {command down, control down}'`
