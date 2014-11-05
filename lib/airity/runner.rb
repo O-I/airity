@@ -41,7 +41,8 @@ module Airity
 
       find('div[role="button"]', text: 'Start a Hangout On Air').click
 
-      meeting_name = ask('Meeting name:') { |q| q.echo = true }
+      meeting_name = #@config[:meeting_name] ||
+                     ask('Meeting name:') { |q| q.echo = true }
       fill_in 'Give it a name', with: meeting_name
 
       # Clear Audience text field
@@ -52,19 +53,12 @@ module Airity
       # prompt for email addresses of speakers and admin(s), e.g.,
       puts 'Enter the email addresses of this month\'s speakers ' \
            'separated by spaces (don\'t forget to invite yourself!)'
-      invitees = ask('Invitees:') { |q| q.echo = true }.split
+      invitees = ask('Invitees:') { |q| q.echo = true }
 
-      # Just dummy this to give a more convenient text field
-      # with which to enter invitees' email addresses
-      find('span', text: 'Search by name or email address').set("'")
+      find('input[aria-label="Search terms"]').set(invitees)
 
-      # Not quite right
-      invitees.each do |invitee|
-        find('span', text: 'Enter email address').set(invitee)
-        find('div[aria-checked="false"]').click
-      end
-
-      click_button 'Done'
+      find('div[role="button"]', text: 'Select all').click
+      find('div[role="button"]', text: 'Done').click
 
       # Remove Public from Audience...again
       begin
@@ -73,7 +67,7 @@ module Airity
         # Public wasn't re-added
       end
 
-      click_button 'Share'
+      find('div[role="button"]', text: 'Share').click
 
       # Make it full screen
       `osascript -e 'tell application "System Events" to keystroke "f" using {command down, control down}'`
