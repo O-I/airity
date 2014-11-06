@@ -10,34 +10,16 @@ module Airity
       Capybara.default_driver = :selenium
       Capybara.app_host = 'https://plus.google.com'
 
-      # Use ~/.airity configuration file
-      configure
-
-      # Navigate to Google+ log in page
-      visit '/'
-
-      # Log in, if needed
-      log_in
-
-      # Allow for 2FA, if required
-      two_factor_authenticate
-
-      # Navigate to Google+ Hangouts on Air page
-      visit '/hangouts/onair'
-
-      start_hangout
-
-      # Clear Audience text field
-      clear_audience_text_field
-
-      # Invite this month's speakers
-      send_invitations
-
-      # Remove Public from Audience...again
-      ensure_private_hangout
-
-      # Share the Hangout privately
-      share_hangout
+      configure                 # Use ~/.airity configuration file
+      visit '/'                 # Navigate to Google+ log in page
+      log_in                    # Log in, if needed
+      two_factor_authenticate   # Allow for 2FA, if required
+      visit '/hangouts/onair'   # Navigate to Google+ Hangouts on Air page
+      start_hangout             # Begin filling in Hangout on Air form
+      clear_audience_text_field # Clear Audience text field
+      send_invitations          # Invite this month's speakers
+      ensure_private_hangout    # Remove Public from Audience...again
+      share_hangout             # Share the Hangout privately
 
       # Email the public YouTube link — not working yet
       # find('div', text: 'Links').click
@@ -82,9 +64,9 @@ module Airity
     end
 
     def invitees
-      puts 'Enter the email addresses of this month\'s speakers ' \
-           'separated by spaces (don\'t forget to invite yourself!)'
-      ask('Invitees:') { |q| q.echo = true }
+      prompt = 'Enter the email addresses of this month\'s speakers ' \
+               'separated by spaces (don\'t forget to invite yourself!)'
+      @config[:invitees] * ' ' || ask(prompt) { |q| q.echo = true }
     end
 
     def log_in
