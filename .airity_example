@@ -1,3 +1,6 @@
-@config = { email: 'foo@bar.com',
-            password: 'bazqux',
-            meeting_name: "Avengers #{Time.now.strftime('%B %Y')} Meeting" }
+:email: foo@bar.com
+:password: bazqux
+:meeting_name: Avengers <%= Time.now.strftime('%B %Y') %> Assemblage
+:invitees:
+  - thanos@infinity.gauntlet
+  - ultron@no_strings.attached
