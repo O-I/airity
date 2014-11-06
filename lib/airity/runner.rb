@@ -1,3 +1,6 @@
+require 'erb'
+require 'yaml'
+
 module Airity
   class Runner
     include Capybara::DSL
@@ -51,13 +54,11 @@ module Airity
 
     def configure
       begin
-        # this doesn't work yet!
-        # how do I require an absolute path?
-        require "Users/#{ENV['USER']}/.airity"
-      rescue LoadError
+        @config = YAML.load(ERB.new(File.read("#{Dir.home}/.airity")).result)
+      rescue => e
         # File doesn't exist
         @config ||= {}
-        puts "You can add a Users/#{ENV['USER']}/.airity file " \
+        puts "You can add a #{Dir.home}/.airity file " \
              'to preset commonly filled fields. '
         puts 'Refer to the .airity_example file or the documentation ' \
              'for more information.'
