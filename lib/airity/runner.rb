@@ -21,8 +21,11 @@ module Airity
       ensure_private_hangout    # Remove Public from Audience...again
       share_hangout             # Share the Hangout privately
 
-      # Email the public YouTube link — not working yet
-      # find('div', text: 'Links').click
+      # Get the public YouTube link
+      find('div', text: 'Links').click rescue false
+      page.execute_script("document.getElementsByClassName('Wfb')[0].click()")
+      puts "The public YouTube link is " +
+      page.evaluate_script("document.getElementsByTagName('input')[5].value")
 
       # Make it full screen
       make_it_full_screen
