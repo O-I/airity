@@ -20,15 +20,8 @@ module Airity
       send_invitations          # Invite this month's speakers
       ensure_private_hangout    # Remove Public from Audience...again
       share_hangout             # Share the Hangout privately
-
-      # Get the public YouTube link
-      find('div', text: 'Links').click rescue false
-      page.execute_script("document.getElementsByClassName('Wfb')[0].click()")
-      puts "The public YouTube link is " +
-      page.evaluate_script("document.getElementsByTagName('input')[5].value")
-
-      # Make it full screen
-      make_it_full_screen
+      publicize youtube_link    # Share the public YouTube link
+      make_it_full_screen       # Make it full screen
 
       # Wait for some input so script doesn't exit
       puts 'Press `return` to quit'
@@ -119,6 +112,16 @@ module Airity
 
     def share_hangout
       find('div[role="button"]', text: 'Share').click
+    end
+
+    def youtube_link
+      sleep 5
+      page.execute_script("document.getElementsByClassName('Wfb')[0].click()")
+      page.evaluate_script("document.getElementsByTagName('input')[5].value")
+    end
+
+    def publicize(link)
+      puts youtube_link
     end
 
     def make_it_full_screen
