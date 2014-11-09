@@ -9,6 +9,7 @@ module Airity
       # Default browser is Firefox
       Capybara.default_driver = :selenium
       Capybara.app_host = 'https://plus.google.com'
+      Capybara.default_wait_time = 5
 
       configure                 # Use ~/.airity configuration file
       visit '/'                 # Navigate to Google+ log in page
@@ -121,7 +122,9 @@ module Airity
     end
 
     def publicize(link)
-      puts youtube_link
+      message = "The public YouTube link is #{link}"
+      puts message
+      find('div[role="button"]', text: 'Share event').click
     end
 
     def make_it_full_screen
