@@ -117,8 +117,8 @@ module Airity
 
     def youtube_link
       sleep 5
-      page.execute_script("document.getElementsByClassName('Wfb')[0].click()")
-      page.evaluate_script("document.getElementsByTagName('input')[5].value")
+      execute_script("document.getElementsByClassName('Wfb')[0].click()")
+      evaluate_script("document.getElementsByTagName('input')[5].value")
     end
 
     def publicize(link)
