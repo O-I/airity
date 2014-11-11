@@ -116,9 +116,13 @@ module Airity
     end
 
     def youtube_link
-      sleep 5
-      execute_script("document.getElementsByClassName('Wfb')[0].click()")
-      evaluate_script("document.getElementsByTagName('input')[5].value")
+      begin
+        sleep 5
+        execute_script("document.getElementsByClassName('Wfb')[0].click();")
+        evaluate_script("document.getElementsByTagName('input')[5].value;")
+      rescue Selenium::WebDriver::Error::JavascriptError
+        retry
+      end
     end
 
     def publicize(link)
