@@ -17,9 +17,7 @@ module Airity
       two_factor_authenticate   # Allow for 2FA, if required
       visit '/hangouts/onair'   # Navigate to Google+ Hangouts on Air page
       start_hangout             # Begin filling in Hangout on Air form
-      clear_audience_text_field # Clear Audience text field
       send_invitations          # Invite this month's speakers
-      ensure_private_hangout    # Remove Public from Audience...again
       share_hangout             # Share the Hangout privately
       publicize youtube_link    # Share the public YouTube link
       make_it_full_screen       # Make it full screen
@@ -89,6 +87,7 @@ module Airity
     def start_hangout
       find('div[role="button"]', text: 'Start a Hangout On Air').click
       fill_in 'Give it a name', with: meeting_name
+      clear_audience_text_field
     end
 
     def clear_audience_text_field
@@ -112,6 +111,7 @@ module Airity
     end
 
     def share_hangout
+      ensure_private_hangout
       find('div[role="button"]', text: 'Share').click
     end
 
