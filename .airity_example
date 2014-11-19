@@ -1,6 +1,20 @@
+# Example .airity YAML configuration file
+# Put this file in your /Users/[HOME] folder to pre-fill commonly used field values
+# All keys need to be explicitly written as symbols
+# You are free to omit any of the key-value pairs
+# airity will ask you for any information it needs that is not included in this file
+
+# The email account that is setting up the Google Hangout on Air
 :email: foo@bar.com
+
+# If you feel comfortable storing your password in plaintext in a file on your Mac,
+# you can include that here, too. Otherwise, just omit this key-value pair.
 :password: bazqux
+
+# You can embed Ruby in this file — handy for, say, titleizing monthly meetings
 :meeting_name: Avengers <%= Time.now.strftime('%B %Y') %> Assemblage
+
+# A list of invitees' email addresses who will be participating in the Hangout on Air
 :invitees:
   - thanos@infinity.gauntlet
-  - ultron@no_strings.attached
+  - ultron@no_strings.onme
