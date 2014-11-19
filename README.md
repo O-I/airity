@@ -1,6 +1,6 @@
 # Airity
 
-Launch a Google Hangouts on Air from the command line.
+Launch a Google Hangouts on Air from the command line on your Mac.
 
 ## Installation
 
@@ -9,6 +9,8 @@ Launch a Google Hangouts on Air from the command line.
 ## Usage
 
 Just type in `airity` at the command line and follow the steps.
+
+You can also add a `.airity` file to your Home directory to pre-fill commonly used field values. Check out the `.airity_example` file for sample usage.
 
 ## Contributing
 
