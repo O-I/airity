@@ -5,7 +5,7 @@ require 'airity/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'airity'
-  spec.version       = Airity::VERSION
+  spec.version       = Airity::Version
   spec.authors       = ['Rahul Horé']
   spec.email         = ['hore.rahul@gmail.com']
   spec.summary       = %q{Hangout on Air launcher}
