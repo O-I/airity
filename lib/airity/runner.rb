@@ -85,7 +85,7 @@ module Airity
     end
 
     def start_hangout
-      find('div[role="button"]', text: 'Start a Hangout On Air').click
+      find('div[role="button"]', text: 'Create a Hangout On Air').click
       fill_in 'Give it a name', with: meeting_name
       clear_audience_text_field
     end
